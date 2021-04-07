@@ -8,16 +8,16 @@ resource "google_storage_bucket_object" "archive" {
   source = "./path/to/zip/file/which/contains/code"
 }
 
-resource "google_cloudfunctions_function" "function" {
-  name        = "function-test"
-  description = "My function"
+resource "google_cloudfunctions_function" "sfdc-connect-cloud-function" {
+  name        = "pub-sub-sfdc-connect-to-push-partner-data"
+  description = "Cloud Function to  push data to sfdc REST service"
   runtime     = "nodejs12"
 
   available_memory_mb   = 128
   source_archive_bucket = google_storage_bucket.bucket.name
   source_archive_object = google_storage_bucket_object.archive.name
   trigger_http          = true
-  entry_point           = "helloGET"
+  entry_point           = "helloWorld"
 }
 
 # IAM entry for all users to invoke the function
